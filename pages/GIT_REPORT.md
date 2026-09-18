@@ -6,18 +6,21 @@
 ## 1. Ветки в репозитории
 
 $ git branch -a
-  develop
+* develop
+  feature/Danon-1ch-hw1
   feature/Danon-1ch-intro
-* feature/Danon-1ch-report
   hotfix/Danon-1ch-typo
   main
-<img width="356" height="89" alt="git branch -a" src="https://github.com/user-attachments/assets/6d073901-be2c-473e-a383-709fa482b412" />
+
+<img width="353" height="89" alt="branch" src="https://github.com/user-attachments/assets/3f172291-b445-4405-9b79-9639891b32b6" />
 
 ## 2. PR фичи
 
 - **PR #1:** feature/Danon-1ch-intro → develop
-- Ссылка: https://github.com/Danon-1ch/InternetTechnologies/pull/1
-- Файлы: students/Danon-1ch/ABOUT.md, NOTES.md, .env.example
+- **PR #4:** feature/Danon-1ch-hw1 → develop
+- **PR #5:** feature/Danon-1ch-hw1 → develop
+- Ссылка: https://github.com/Danon-1ch/InternetTechnologies/pull/1 https://github.com/Danon-1ch/InternetTechnologies/pull/4 https://github.com/Danon-1ch/InternetTechnologies/pull/5
+- Файлы: students/Danon-1ch/ABOUT.md, NOTES.md, .env.example, pages/GIT_REPORT.md, index.html, styles.css
 
 ## 3. Hotfix
 
@@ -29,8 +32,14 @@ $ git branch -a
 ## 4. Граф истории
 
 $ git log --oneline --graph --all
-* e05f7d0 (HEAD -> feature/Danon-1ch-report, origin/feature/Danon-1ch-report) docs: add git flow report
-*   c18b1a3 (origin/develop, develop) Merge pull request #1 from Danon-1ch/feature/Danon-1ch-intro
+*   6df9610 (HEAD -> develop, origin/develop) Merge pull request #5 from Danon-1ch/feature/Danon-1ch-hw1
+|\
+| * e0c769d (origin/feature/Danon-1ch-hw1, feature/Danon-1ch-hw1) chore: add root gitignore
+* | aa1edbc Merge pull request #4 from Danon-1ch/feature/Danon-1ch-hw1
+|\|
+| * 6801e4a feat: add hw1 landing page, docs: add git flow report
+|/
+*   c18b1a3 Merge pull request #1 from Danon-1ch/feature/Danon-1ch-intro
 |\
 | * a986261 (origin/feature/Danon-1ch-intro, feature/Danon-1ch-intro) docs: add .env.example and .gitignore
 | * fcdc239 docs: add NOTES.md
@@ -46,7 +55,8 @@ $ git log --oneline --graph --all
 | * a3669b1 feat: add hello.txt
 |/
 * d6ebc92 Initial commit
-<img width="756" height="255" alt="graph" src="https://github.com/user-attachments/assets/4a82ec40-3b08-4c56-9ea0-9ec0fafad706" />
+<img width="743" height="341" alt="image" src="https://github.com/user-attachments/assets/56d96287-5ee3-4acb-8f29-2cb24e6193a9" />
+
 
 ## 5. Таблица Git Flow
 
