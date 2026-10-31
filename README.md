@@ -200,6 +200,26 @@ curl http://localhost:8000/health
 
 ---
 
+## Тесты
+
+112 тестов: юнит, интеграционные, тесты БД и e2e. Покрытие `app/` — 100% (строки и ветки), порог зашит в `.coveragerc`.
+
+```bash
+# 1. Тестовая БД (отдельная от dev-данных)
+docker compose up -d db
+docker compose exec db createdb -U taskflow taskflow_test
+
+# 2. Зависимости и запуск
+pip install -r requirements-dev.txt
+pytest
+```
+
+Адрес тестовой БД по умолчанию — `postgresql+psycopg2://taskflow:taskflow@localhost:5432/taskflow_test`, переопределяется через `TEST_DATABASE_URL`. Схема создаётся и удаляется автоматически, таблицы очищаются между тестами.
+
+Запуск по категориям: `pytest -m unit`, `-m integration`, `-m db`, `-m e2e`.
+
+---
+
 ## Миграции
 
 Применяются автоматически при `docker compose up`. Вручную — из контейнера:
