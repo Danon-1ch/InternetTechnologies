@@ -72,9 +72,7 @@ def test_full_task_lifecycle_over_http(http):
     )
     comment = create_comment(http, task["id"], author["id"], body="On it")
 
-    filtered = http.get(
-        f"/v1/tasks?project_id={project['id']}&status=open"
-    ).json()
+    filtered = http.get(f"/v1/tasks?project_id={project['id']}&status=open").json()
     assert [item["id"] for item in filtered] == [task["id"]]
 
     updated = http.patch(f"/v1/tasks/{task['id']}", json={"status": "done"})

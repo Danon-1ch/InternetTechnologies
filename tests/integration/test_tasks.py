@@ -89,9 +89,7 @@ def test_filter_tasks_by_project_and_status(client):
     expected = create_task(client, project["id"], status="in_progress")
     create_task(client, other_project["id"], status="in_progress")
 
-    tasks = client.get(
-        f"/v1/tasks?project_id={project['id']}&status=in_progress"
-    ).json()
+    tasks = client.get(f"/v1/tasks?project_id={project['id']}&status=in_progress").json()
 
     assert [task["id"] for task in tasks] == [expected["id"]]
 

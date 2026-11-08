@@ -27,9 +27,7 @@ def database():
 @pytest.fixture
 def clean_tables(database):
     with engine.begin() as connection:
-        connection.execute(
-            text("TRUNCATE users, projects, labels, tasks, comments RESTART IDENTITY CASCADE")
-        )
+        connection.execute(text("TRUNCATE users, projects, labels, tasks, comments RESTART IDENTITY CASCADE"))
 
 
 @pytest.fixture

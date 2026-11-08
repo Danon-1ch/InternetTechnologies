@@ -202,7 +202,7 @@ curl http://localhost:8000/health
 
 ## Тесты
 
-112 тестов: юнит, интеграционные, тесты БД и e2e. Покрытие `app/` — 100% (строки и ветки), порог зашит в `.coveragerc`.
+119 тестов: юнит, интеграционные, тесты БД и e2e. Покрытие `app/` — 100% (строки и ветки), порог зашит в `.coveragerc`.
 
 ```bash
 # 1. Тестовая БД (отдельная от dev-данных)
@@ -216,7 +216,44 @@ pytest
 
 Адрес тестовой БД по умолчанию — `postgresql+psycopg2://taskflow:taskflow@localhost:5432/taskflow_test`, переопределяется через `TEST_DATABASE_URL`. Схема создаётся и удаляется автоматически, таблицы очищаются между тестами.
 
-Запуск по категориям: `pytest -m unit`, `-m integration`, `-m db`, `-m e2e`.
+Запуск по категориям: `pytest -m unit --no-cov`, `-m integration --no-cov`, `-m db --no-cov`, `-m e2e --no-cov`.
+
+---
+
+## Логирование
+
+Настраивается через переменные окружения:
+
+| Переменная | По умолчанию | Назначение |
+|---|---|---|
+| `LOG_LEVEL` | `INFO` | `DEBUG`, `INFO`, `WARNING`, `ERROR`, `CRITICAL` |
+| `LOG_FORMAT` | `%(asctime)s %(levelname)s %(name)s %(message)s` | формат записи |
+| `LOG_DATE_FORMAT` | `%Y-%m-%d %H:%M:%S` | формат времени |
+| `LOG_FILE` | не задан — вывод в stderr | путь к файлу лога |
+
+Уровни используются так:
+
+- `DEBUG` — начало HTTP-запроса;
+- `INFO` — успешный запрос и успешный `/health`;
+- `WARNING` — ответ `4xx`;
+- `ERROR` — ответ `5xx`;
+- `CRITICAL` — `/health` не смог подключиться к БД (ответ `503`).
+
+Пример:
+
+```bash
+LOG_LEVEL=DEBUG LOG_FILE=app.log uvicorn app.main:app
+```
+
+---
+
+## CI
+
+`.github/workflows/ci.yml` запускается на `push` и `pull_request` и содержит три job:
+
+- **style** — `ruff format --check app tests`;
+- **analyze** — `ruff check app tests`;
+- **test** — `pytest` с PostgreSQL 16 и порогом покрытия 100%.
 
 ---
 
